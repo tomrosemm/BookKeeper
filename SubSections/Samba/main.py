@@ -1,23 +1,8 @@
 import os
 import pandas as pd
 
-DEFAULT_CSV_FILE = "books.csv"  # Default CSV file name
 
-
-def format_csv_value(value):
-    """
-    Format a cell value for CSV:
-    - If the value contains commas, double quotes, or starts/ends with whitespace,
-      enclose it in double quotes and escape double quotes.
-    - Remove newline characters (\n) from the value.
-    """
-    value = value.replace('\n', ' ')  # Replace newline characters with spaces
-    if any([char in value for char in (',', '"')]) or value.strip() != value:
-        return f'"{value.replace("\"", "\"\"")}"'
-    return value
-
-
-def fill_blank_cells(csv_file=DEFAULT_CSV_FILE):
+def samba(csv_file, overwrite_original=False):
     # Check if the CSV file exists
     if not os.path.isfile(csv_file):
         raise FileNotFoundError(f"CSV file '{csv_file}' not found.")
@@ -34,8 +19,7 @@ def fill_blank_cells(csv_file=DEFAULT_CSV_FILE):
     try:
         # Iterate over rows with blank cells
         for index, row in blank_cells.iterrows():
-            if row.any():  # Check if the row has any blank cells
-                print(f"Row {index}:")
+            if row.any():  # Check if the row has at least one blank cell
                 print(df.loc[index])  # Print the row for reference
 
                 # Prompt user for input for missing information
@@ -70,16 +54,40 @@ def fill_blank_cells(csv_file=DEFAULT_CSV_FILE):
     except KeyboardInterrupt:
         save_changes = input("\nDo you want to save changes? (y/n): ").strip().lower()
         if save_changes == 'y':
-            # Write the updated DataFrame back to the CSV file
-            df.to_csv(csv_file, index=False)
-            print("Changes saved successfully.")
+            if overwrite_original:
+                # Write the updated DataFrame back to the original CSV file
+                df.to_csv(csv_file, index=False)
+                print("Changes saved to the original file.")
+            else:
+                # Determine the new file path for the cleaned data
+                output_file_path = csv_file.replace('.csv', '_cleaned.csv')
+
+                # Write the updated DataFrame to a new CSV file
+                df.to_csv(output_file_path, index=False)
+                print("Changes saved to a new file:", output_file_path)
         else:
             print("Changes have not been saved.")
 
     return df
 
 
+def format_csv_value(value):
+    # You can define your own formatting logic here if needed
+    return value
+
+
+'''
+# Usage examples:
+
+# Overwriting the original file
+samba("books.csv", overwrite_original=True)
+
+# Creating a new file with cleaned data
+samba("books.csv", overwrite_original=False)
+
+
 # Example usage
 filled_df = fill_blank_cells()
 
 # print(filled_df)
+'''

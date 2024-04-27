@@ -7,11 +7,8 @@ import json
 import csv
 import time
 
-def process95(input_filepath, loopNum, output_filepath="books.csv", initial_delay=2, max_retries=5):
-    count = 0
+def jongara(input_filepath, output_filepath=DEFAULT_CSV_FILE, initial_delay=2, max_retries=7):
     delay = initial_delay
-
-    print("Jongara - Start")
 
     # Open text file of ISBNs to read
     with open(input_filepath, "r") as f_in:
@@ -56,39 +53,34 @@ def process95(input_filepath, loopNum, output_filepath="books.csv", initial_dela
                                 # Write extracted data to CSV file
                                 writer.writerow([current_ISBN.strip(), current_title, ', '.join(current_authors), current_summary])
                                 success = True
+
                             else:
                                 # If no book found for the ISBN, write a placeholder to the CSV file
                                 writer.writerow([current_ISBN.strip(), "N/A", "N/A", "N/A"])
                                 success = True
+
                     except urllib.error.HTTPError as e:
                         # Handle HTTP errors (e.g., too many requests)
                         if e.code == 429:
                             retries += 1
-                            print(f"Too many requests error. Retrying in {delay} seconds...")
                             time.sleep(delay)
                             delay *= 2  # Exponential backoff
                         else:
-                            print("Unhandled HTTP error:", e)
                             break
                     except Exception as e:
-                        print("Error:", e)
                         break
 
-                count += 1
-                print("Book", loopNum, ".", count, " complete.")
+                print("Processed ISBN:", current_ISBN.strip())
 
                 # Reset delay for next iteration
                 delay = initial_delay
 
-    print("Extraction and writing of ", count, " books and details to 'books.csv' this loop.")
-    return count  # Move the return statement outside the loop
+    print("Processing complete.")
 
 
-def __main__():
-    totalCount = process95(r"C:\Users\trose\Desktop\Database Design\BooK.K.Eeper\list_of_isbn1.txt", 1)
-    totalCount += process95(r"C:\Users\trose\Desktop\Database Design\BooK.K.Eeper\list_of_isbn2.txt", 2)
-
-    print("Extraction and writing of ", totalCount, " books and details to 'books.csv' total.")
-
-
-__main__()
+'''
+# Example usage:
+input_filepath = "input_ISBNs.txt"  # Replace with the path to your input file
+output_filepath = "output_books.csv"  # Replace with the desired output file path
+process95(input_filepath, output_filepath)
+'''

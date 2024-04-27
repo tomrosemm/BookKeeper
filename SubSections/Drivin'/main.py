@@ -27,8 +27,7 @@ def format_csv_value(value):
 # Change this back to Jongara; the 95 limit was a test and was disproved immediately, but we are still maneuvering
 # through the program as if it has a 95 limit. Refactor - remove loop counter, but reinstate the console feedback when
 # a response is failed along with the wait time; only worry about reading through one .txt file;
-def process95(input_filepath, loopNum, output_filepath="books.csv", initial_delay=2, max_retries=7):
-    count = 0
+def jongara(input_filepath, output_filepath=DEFAULT_CSV_FILE, initial_delay=2, max_retries=7):
     delay = initial_delay
 
     # Open text file of ISBNs to read
@@ -53,7 +52,6 @@ def process95(input_filepath, loopNum, output_filepath="books.csv", initial_dela
                     # Connect to Google Books API
                     base_api_link = "https://www.googleapis.com/books/v1/volumes?q=isbn:"
                     try:
-
                         with urllib.request.urlopen(base_api_link + current_ISBN.strip()) as response:
                             text = response.read()
                             decoded_text = text.decode("utf-8")
@@ -84,28 +82,25 @@ def process95(input_filepath, loopNum, output_filepath="books.csv", initial_dela
                     except urllib.error.HTTPError as e:
                         # Handle HTTP errors (e.g., too many requests)
                         if e.code == 429:
-                            # Feedback Text Here
                             retries += 1
                             time.sleep(delay)
-                            # Feedback Text Here
                             delay *= 2  # Exponential backoff
                         else:
                             break
-                            # Feedback Text Here (maybe)
                     except Exception as e:
                         break
 
-                count += 1
-                print("Book", loopNum, ".", count)
+                print("Processed ISBN:", current_ISBN.strip())
 
                 # Reset delay for next iteration
                 delay = initial_delay
 
-    return count
+    print("Processing complete.")
 
 
 # Search books.csv for rows with empty or N/A values and prompt user to replace the missing values in order, skip option
-def samba(csv_file=DEFAULT_CSV_FILE):
+# Can overwrite fed file or make a new one
+def samba(csv_file, overwrite_original=False):
     # Check if the CSV file exists
     if not os.path.isfile(csv_file):
         raise FileNotFoundError(f"CSV file '{csv_file}' not found.")
@@ -124,7 +119,6 @@ def samba(csv_file=DEFAULT_CSV_FILE):
         for index, row in blank_cells.iterrows():
             if row.any():  # Check if the row has at least one blank cell
                 print(df.loc[index])  # Print the row for reference
-                # Rest of the code remains unchanged
 
                 # Prompt user for input for missing information
                 for column in df.columns:
@@ -158,9 +152,17 @@ def samba(csv_file=DEFAULT_CSV_FILE):
     except KeyboardInterrupt:
         save_changes = input("\nDo you want to save changes? (y/n): ").strip().lower()
         if save_changes == 'y':
-            # Write the updated DataFrame back to the CSV file
-            df.to_csv(csv_file, index=False)
-            print("Changes saved successfully.")
+            if overwrite_original:
+                # Write the updated DataFrame back to the original CSV file
+                df.to_csv(csv_file, index=False)
+                print("Changes saved to the original file.")
+            else:
+                # Determine the new file path for the cleaned data
+                output_file_path = csv_file.replace('.csv', '_cleaned.csv')
+
+                # Write the updated DataFrame to a new CSV file
+                df.to_csv(output_file_path, index=False)
+                print("Changes saved to a new file:", output_file_path)
         else:
             print("Changes have not been saved.")
 
@@ -229,8 +231,8 @@ def main():
         print("books.csv already exists locally. Skipping Jongara process.")
     else:
         print("Jongara- start")  # Liar
-        totalCount = process95("list_of_isbn1.txt", 1)
-        totalCount += process95("list_of_isbn2.txt", 2)
+        totalCount = jongara("list_of_isbn1.txt", 1)
+        totalCount += jongara("list_of_isbn2.txt", 2)
         print("Extraction and writing of ", totalCount, " books and details to 'books.csv' total.")
         print("Jongara - end")  # Liar
 

@@ -3,7 +3,9 @@
 import pandas as pd
 
 
-def remove_blank_lines_from_csv(filename):
+# Removes blank lines from end of csv files
+# Now also pass a true or false boolean named replace_original to either replace the original file or make a new one
+def condor(filename, replace_original=False):
     # Read the CSV file into a DataFrame
     df = pd.read_csv(filename)
 
@@ -11,10 +13,28 @@ def remove_blank_lines_from_csv(filename):
     while df.empty or df.iloc[-1].isnull().all():
         df = df[:-1]
 
-    # Write the cleaned DataFrame back to the original file
-    df.to_csv(filename, index=False)
+    if replace_original:
+        # Write the cleaned DataFrame back to the original file
+        df.to_csv(filename, index=False)
+    else:
+        # Return the cleaned DataFrame
+        return df
 
 
+'''
+# Usage
+filename = 'example.csv'
+
+# Remove blank lines and replace the original file
+condor(filename, replace_original=True)
+
+# Or, remove blank lines and get the cleaned DataFrame without modifying the original file
+cleaned_df = condor(filename)
+print(cleaned_df)
+'''
+
+
+'''
 # Runtime monitoring to terminal
 print("Condor - Start")
 
@@ -33,3 +53,5 @@ print("Blank lines removed from", copiesFile)
 
 remove_blank_lines_from_csv(studentsFile)
 print("Blank lines removed from", studentsFile)
+'''
+
