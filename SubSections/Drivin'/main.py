@@ -15,6 +15,7 @@ output_file_path = "cleaned_students.csv"
 destination = r'C:\Users\trose\PycharmProjects\Stale Cupcakes'
 
 
+'''
 # Format a cell value for CSV: 1 - If the value contains commas, double quotes, or starts/ends with whitespace,
 # enclose it in double quotes and escape double quotes. 2 - Remove newline characters (\n) from the value.
 def format_csv_value(value):
@@ -22,8 +23,10 @@ def format_csv_value(value):
     if any([char in value for char in (',', '"')]) or value.strip() != value:
         return f'"{value.replace("\"", "\"\"")}"'
     return value
+'''
 
 
+'''
 # Change this back to Jongara; the 95 limit was a test and was disproved immediately, but we are still maneuvering
 # through the program as if it has a 95 limit. Refactor - remove loop counter, but reinstate the console feedback when
 # a response is failed along with the wait time; only worry about reading through one .txt file;
@@ -96,8 +99,10 @@ def jongara(input_filepath, output_filepath=DEFAULT_CSV_FILE, initial_delay=2, m
                 delay = initial_delay
 
     print("Processing complete.")
+'''
 
 
+'''
 # Search books.csv for rows with empty or N/A values and prompt user to replace the missing values in order, skip option
 # Can overwrite fed file or make a new one
 def samba(csv_file, overwrite_original=False):
@@ -167,8 +172,10 @@ def samba(csv_file, overwrite_original=False):
             print("Changes have not been saved.")
 
     return df
+'''
 
 
+'''
 # Cleans students.csv
 def technopop(input_file_path, output_file_path):
 
@@ -186,8 +193,9 @@ def technopop(input_file_path, output_file_path):
 
     # Progress indicators to console for user
     print("Technopop - End")
+'''
 
-
+'''
 # Probably can be trimmed, offhand it was only created to test the 95 limit
 def combine_txt_files(input_files, output_file):
     with open(output_file, 'w') as outfile:
@@ -195,8 +203,9 @@ def combine_txt_files(input_files, output_file):
             with open(file, 'r') as infile:
                 for line in infile:
                     outfile.write(line)
+'''
 
-
+'''
 def marathon(input_file, output_file):
     # Read ISBNs from the input text file
     with open(input_file, 'r') as file:
@@ -216,6 +225,7 @@ def marathon(input_file, output_file):
 
     # Write the DataFrame to a new CSV file
     df.to_csv(output_file, index=False)
+'''
 
 
 def main():
