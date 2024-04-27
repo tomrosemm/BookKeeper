@@ -8,7 +8,7 @@ import shutil
 
 # Constant file paths
 DEFAULT_CSV_FILE = "Files/books.csv"  # Default CSV file name for books table
-output_file ="Files/copies.csv" # Default name for copies csv file
+output_file = "Files/copies.csv"  # Default name for copies csv file
 
 
 # Removes blank lines from end of csv files
