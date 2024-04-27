@@ -1,0 +1,17 @@
+# Things that need to be accomplished in Drivin':
+# Check if system works without running jongara several times, convert back
+# Make Function out of joining .txt files even if not currently needed
+# Change ISBNs to be one list if possible
+# Make files local paths by default, but allow for file finders to change, too
+# Make a basic GUI, file finders and a basic screen to start
+
+# Things that need to be able to be done in Stale Cupcakes:
+# Check out book (user and admin)
+# Return book (user and admin)
+# Browse books (user or admin)
+# Look at books checked out to one user (user or admin)
+# Look at all currently checked out book (admin)
+# Look at history of checked out and in books, either table wide or by student ID (admin)
+# View the info in the cleaned_students.csv file to find a student based on sID (admin)
+# Allow safe powering off of the system (admin)
+# Allow for changing of admin password (admin)
