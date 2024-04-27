@@ -7,7 +7,8 @@ import time
 import shutil
 
 # Constant file paths
-DEFAULT_CSV_FILE = "Files/books.csv"  # Default CSV file name - set in the main file
+DEFAULT_CSV_FILE = "Files/books.csv"  # Default CSV file name for books table
+output_file ="Files/copies.csv" # Default name for copies csv file
 
 
 # Removes blank lines from end of csv files
@@ -66,3 +67,24 @@ def technopop(input_file_path, overwrite_original=False):
 
     # Progress indicators to console for user
     print("Technopop - End")
+
+
+def marathon(input_file, output_file):
+    # Read ISBNs from the input text file
+    with open(input_file, 'r') as file:
+        isbn_list = [line.strip() for line in file]
+
+    # Create a DataFrame with the ISBNs
+    df = pd.DataFrame({'ISBN': isbn_list})
+
+    # Group by ISBN and count copies
+    df['copyNum'] = df.groupby('ISBN').cumcount() + 1
+
+    # Add a default condition column
+    df['condition'] = 'unset'
+
+    # Reorder columns
+    df = df[['ISBN', 'copyNum', 'condition']]
+
+    # Write the DataFrame to a new CSV file
+    df.to_csv(output_file, index=False)
