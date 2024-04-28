@@ -1,19 +1,14 @@
 import tkinter as tk
-import config
-from tkinter import filedialog
-from setup import condor, format_csv_value, technopop, marathon, jongara, strip_unique_isbns
+from bookAndCopySetup import bookandcopyinitialize
+from studentSetup import studentinitialize
 
 
 def button1_click(window):
-    bookAndCopyInitiaize()
-
+    bookandcopyinitialize()
 
 
 def button2_click(window):
-    # Open a file dialog for selecting a .csv file
-    filepath = filedialog.askopenfilename(parent=window, filetypes=[("CSV files", "*.csv")])
-    if filepath:
-        print("Selected .csv file:", filepath)
+    studentinitialize()
 
 
 def button3_click():
@@ -28,7 +23,7 @@ def button5_click():
     print("Button 5 clicked!")
 
 
-def bookAndCopyInitiaize():
+def studentinitialize():
     return
 
 

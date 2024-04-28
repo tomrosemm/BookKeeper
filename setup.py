@@ -5,7 +5,7 @@ import json
 import csv
 import time
 import shutil
-import config
+
 
 # Removes blank lines from end of csv files
 # Now also pass a true or false boolean named replace_original to either replace the original file or make a new one
@@ -85,7 +85,8 @@ def marathon(input_file, output_file):
     # Write the DataFrame to a new CSV file
     df.to_csv(output_file, index=False)
 
-def jongara(input_filepath, output_filepath=config.default_books_file, initial_delay=2, max_retries=7):
+
+def jongara(input_filepath, output_filepath, initial_delay=2, max_retries=7):
     delay = initial_delay
 
     # Open text file of ISBNs to read
