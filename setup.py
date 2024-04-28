@@ -156,7 +156,7 @@ def jongara(input_filepath, output_filepath=config.default_books_file, initial_d
     print("Processing complete.")
 
 
-def strip_unique_isbns(input_filepath):
+def strip_unique_isbns(input_filepath, output_filepath):
     # Set to store unique ISBNs
     unique_isbns = set()
 
@@ -167,4 +167,7 @@ def strip_unique_isbns(input_filepath):
             if isbn:  # Check if the line is not empty
                 unique_isbns.add(isbn)
 
-    return list(unique_isbns)
+    # Write unique ISBNs to a text file
+    with open(output_filepath, "w") as output_file:
+        for isbn in unique_isbns:
+            output_file.write(isbn + '\n')
