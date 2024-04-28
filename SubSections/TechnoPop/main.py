@@ -33,10 +33,10 @@ def technopop(input_file_path, overwrite_original=False):
     print("Technopop - End")
 
 
-'''
+''''
 # Usage with overwrite_original=True
 input_file_path = r"path\to\students.csv"  # Replace with the path to your students.csv file
-technopop(input_file_path, overwrite_original=True)
+technopop("students.csv", overwrite_original=True)
 
 # Usage with overwrite_original=False
 input_file_path = r"path\to\students.csv"  # Replace with the path to your students.csv file
