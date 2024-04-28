@@ -172,3 +172,5 @@ def strip_unique_isbns(input_filepath, output_filepath):
     with open(output_filepath, "w") as output_file:
         for isbn in unique_isbns:
             output_file.write(isbn + '\n')
+
+

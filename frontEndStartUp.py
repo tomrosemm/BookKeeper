@@ -23,10 +23,6 @@ def button5_click():
     print("Button 5 clicked!")
 
 
-def studentinitialize():
-    return
-
-
 def main():
     # Create the main window
     root = tk.Tk()
