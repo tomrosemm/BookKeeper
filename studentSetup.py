@@ -1,5 +1,4 @@
-from setup import condor, format_csv_value, technopop, marathon, jongara, strip_unique_isbns
-
+from setup import technopop
 
 def studentinitialize():
     print("Student")

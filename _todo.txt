@@ -3,3 +3,5 @@ TODO: Separate the usage files into their own singular location in file structur
 TODO: Rewrite the different specific functioned programs as functions in scripts i can invoke in the main processing script
 TODO: Start mocking up original, get specs from raspberry pi
 TODO: Probably put the file finding dialogues in one step and the initial setup in a second step, and setup via text isolation first
+
+TODO: Admin tools step: Setup Database, Setup Backup, Setup Samba, Go fromt here

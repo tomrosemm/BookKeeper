@@ -1,10 +1,8 @@
-import os
 import pandas as pd
 import urllib.request
 import json
 import csv
 import time
-import shutil
 
 
 # Removes blank lines from end of csv files

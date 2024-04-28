@@ -1,4 +1,4 @@
-from setup import condor, format_csv_value, technopop, marathon, jongara, strip_unique_isbns
+from setup import marathon, jongara, strip_unique_isbns
 
 
 def bookandcopyinitialize():
@@ -9,4 +9,3 @@ def bookandcopyinitialize():
     strip_unique_isbns(initial_isbn_list, singleton_isbn_list)
     marathon(singleton_isbn_list, copies_file)
     jongara(singleton_isbn_list, books_file)
-    return
