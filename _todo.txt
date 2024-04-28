@@ -1,8 +1,5 @@
-TODO: Go through current folders and trim unnecessary things or duplicates as far as files
-TODO: Separate the usage files into their own singular location in file structure
-TODO: Rewrite the different specific functioned programs as functions in scripts i can invoke in the main processing script
-TODO: Start mocking up original, get specs from raspberry pi
-TODO: Probably put the file finding dialogues in one step and the initial setup in a second step, and setup via text isolation first
-
+TODO: Go through current folders and trim unnecessary things or duplicates as far as files (At end of production)
+TODO: Separate the usage files into their own singular location in file structure (Maybe not; try again but w.e. if it doesn't work)
+TODO: Rewrite the different specific functioned programs as functions in scripts I can invoke in the main processing script
 TODO: Admin tools step: Setup Database, Setup Backup, Setup Samba, Go from there
 TODO: Everything will eventually need front end feedback
