@@ -37,7 +37,7 @@ def create_window():
     # Define button names, functions, and label texts
     button_info = [
         ("Samba", function1, "Add missing details to books in your library"),
-        ("Stale Cupcakes", function2, "Set up your system for use for the first time")
+        ("Stale Cupcakes", function2, "Second half of initial file setup")
         #("Button 3 Name", function3, "Label 3 Text"),
         #("Button 4 Name", function4, "Label 4 Text"),
         #("Button 5 Name", function5, "Label 5 Text"),

@@ -1,3 +1,5 @@
+from setup import samba
+
 
 def updatebookdetails():
     print("Function 1 called")
