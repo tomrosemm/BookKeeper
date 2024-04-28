@@ -15,7 +15,6 @@ def run_script2():
 def button1_clicked():
     run_script1()
 
-
 def button2_clicked():
     run_script2()
 
