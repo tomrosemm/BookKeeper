@@ -9,3 +9,11 @@ def bookandcopyinitialize():
     strip_unique_isbns(initial_isbn_list, singleton_isbn_list)
     marathon(singleton_isbn_list, copies_file)
     jongara(singleton_isbn_list, books_file)
+
+
+def main():
+    bookandcopyinitialize()
+
+
+if __name__ == "__main__":
+    main()
