@@ -1,10 +1,38 @@
 import tkinter as tk
-from buttonClickStartup import button1_click, button2_click, button3_click, button4_click, button5_click
+import config
+from tkinter import filedialog
+from setup import condor, format_csv_value, technopop, marathon, jongara, strip_unique_isbns
+
+def button1_click(window):
+    # Open a file dialog for selecting a .txt file
+    isbn_starting_filepath = filedialog.askopenfilename(parent=window, filetypes=[("Text files", "*.txt")])
+    if isbn_starting_filepath:
+        print("Selected .txt file:", isbn_starting_filepath)
+
+
+def button2_click(window):
+    # Open a file dialog for selecting a .csv file
+    filepath = filedialog.askopenfilename(parent=window, filetypes=[("CSV files", "*.csv")])
+    if filepath:
+        print("Selected .csv file:", filepath)
+
+
+def button3_click():
+    print("Button 3 clicked!")
+
+
+def button4_click():
+    print("Button 4 clicked!")
+
+
+def button5_click():
+    print("Button 5 clicked!")
+
 
 def main():
     # Create the main window
     root = tk.Tk()
-    root.title("Button Clicks")
+    root.title("Initial Setup")
 
     # Create and configure the frame
     frame = tk.Frame(root, padx=20, pady=20)
@@ -40,6 +68,8 @@ def main():
 
     # Run the main event loop
     root.mainloop()
+
+
 
 
 if __name__ == "__main__":
